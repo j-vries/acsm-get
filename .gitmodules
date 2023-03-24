@@ -1,0 +1,6 @@
+[submodule "lib/libgourou"]
+	path = lib/libgourou
+	url = git://soutade.fr/libgourou.git
+[submodule "lib/updfparser"]
+	path = lib/updfparser
+	url = git://soutade.fr/updfparser.git

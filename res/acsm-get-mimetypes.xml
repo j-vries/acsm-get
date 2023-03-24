@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+	<mime-type type="application/acsm">
+		<sub-class-of type="application/xml"/>
+		<comment>Adobe Content Server Message</comment>
+		<glob pattern="*.acsm"/>
+	</mime-type>
+</mime-info>

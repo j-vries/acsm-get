@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=acsm-get
+TryExec=acsm-get
+Exec=acsm-get %f
+Icon=acsm-get
+Categories=GTK;Utility
+Comment=Download e-books from acsm files.
+MimeType=application/acsm;
+Terminal=false
