@@ -33,8 +33,8 @@ namespace acsmget
 			~AdeptClient();
 			void authorize_async(bool use_adobe_account, const std::string &username, const std::string &password);
 			void check_authorization_async();
-			void deauthorize_async();
 			void download_async(const std::string &acsm_file);
+			void erase_authorization_async();
 			void return_loan_async(const std::string &acsm_file);
 
 			bool get_authorized();
@@ -45,13 +45,13 @@ namespace acsmget
 
 			Glib::Dispatcher *get_authorize_success_dispatcher();
 			Glib::Dispatcher *get_authorize_failed_dispatcher();
-			Glib::Dispatcher *get_deauthorize_started_dispatcher();
-			Glib::Dispatcher *get_deauthorize_success_dispatcher();
-			Glib::Dispatcher *get_deauthorize_failed_dispatcher();
 			Glib::Dispatcher *get_authorized_dispatcher();
 			Glib::Dispatcher *get_download_started_dispatcher();
 			Glib::Dispatcher *get_download_success_dispatcher();
 			Glib::Dispatcher *get_download_failed_dispatcher();
+			Glib::Dispatcher *get_erase_authorization_started_dispatcher();
+			Glib::Dispatcher *get_erase_authorization_success_dispatcher();
+			Glib::Dispatcher *get_erase_authorization_failed_dispatcher();
 			Glib::Dispatcher *get_return_loan_started_dispatcher();
 			Glib::Dispatcher *get_return_loan_success_dispatcher();
 			Glib::Dispatcher *get_return_loan_failed_dispatcher();
@@ -61,8 +61,8 @@ namespace acsmget
 		private:
 			void authorize(bool use_adobe_account, const std::string &username, const std::string &password);
 			void check_authorization();
-			void deauthorize();
 			void download(const std::string &acsm_file);
+			void erase_authorization();
 			void return_loan(const std::string &acsm_file);
 
 			void set_authorized(bool authorized = true);
@@ -87,13 +87,13 @@ namespace acsmget
 
 			Glib::Dispatcher m_authorize_success_dispatcher;
 			Glib::Dispatcher m_authorize_failed_dispatcher;
-			Glib::Dispatcher m_deauthorize_started_dispatcher;
-			Glib::Dispatcher m_deauthorize_success_dispatcher;
-			Glib::Dispatcher m_deauthorize_failed_dispatcher;
 			Glib::Dispatcher m_authorized_dispatcher;
 			Glib::Dispatcher m_download_started_dispatcher;
 			Glib::Dispatcher m_download_success_dispatcher;
 			Glib::Dispatcher m_download_failed_dispatcher;
+			Glib::Dispatcher m_erase_authorization_started_dispatcher;
+			Glib::Dispatcher m_erase_authorization_success_dispatcher;
+			Glib::Dispatcher m_erase_authorization_failed_dispatcher;
 			Glib::Dispatcher m_return_loan_started_dispatcher;
 			Glib::Dispatcher m_return_loan_success_dispatcher;
 			Glib::Dispatcher m_return_loan_failed_dispatcher;

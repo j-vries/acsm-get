@@ -32,18 +32,18 @@ namespace acsmget
 		private:
 			void on_action_open_acsm();
 			void on_action_authorize();
-			void on_action_deauthorize();
+			void on_action_erase_authorization();
 			void on_action_return_loan();
 			void on_action_about();
 
 			void on_authorized_update();
 			void on_busy_update();
-			void on_deauthorize_started();
-			void on_deauthorize_success();
-			void on_deauthorize_failed();
 			void on_download_started();
 			void on_download_success();
 			void on_download_failed();
+			void on_erase_authorization_started();
+			void on_erase_authorization_success();
+			void on_erase_authorization_failed();
 			void on_progress_update();
 			void on_return_loan_started();
 			void on_return_loan_success();

@@ -51,22 +51,22 @@ namespace acsmget
 
 		auto menu = Gio::Menu::create();
 		auto section1 = Gio::Menu::create();
-		section1->append(texts_action_authorize_computer,   "actions.authorize");
-		section1->append(texts_action_deauthorize_computer, "actions.deauthorize");
+		section1->append(texts_action_authorize_computer,  "actions.authorize");
+		section1->append(texts_action_erase_authorization, "actions.erase_authorization");
 		auto section2 = Gio::Menu::create();
-		section2->append(texts_action_return_loan,          "actions.return_loan");
+		section2->append(texts_action_return_loan,         "actions.return_loan");
 		auto section3 = Gio::Menu::create();
-		section3->append(texts_action_about,                "actions.about");
+		section3->append(texts_action_about,               "actions.about");
 		menu->append_section(section1);
 		menu->append_section(section2);
 		menu->append_section(section3);
 		m_menu_button.set_menu_model(menu);
 
 		m_actiongroup = Gio::SimpleActionGroup::create();
-		m_actiongroup->add_action("authorize",   sigc::mem_fun(*this, &MainWindow::on_action_authorize));
-		m_actiongroup->add_action("deauthorize", sigc::mem_fun(*this, &MainWindow::on_action_deauthorize));
-		m_actiongroup->add_action("return_loan", sigc::mem_fun(*this, &MainWindow::on_action_return_loan));
-		m_actiongroup->add_action("about",       sigc::mem_fun(*this, &MainWindow::on_action_about));
+		m_actiongroup->add_action("authorize",           sigc::mem_fun(*this, &MainWindow::on_action_authorize));
+		m_actiongroup->add_action("erase_authorization", sigc::mem_fun(*this, &MainWindow::on_action_erase_authorization));
+		m_actiongroup->add_action("return_loan",         sigc::mem_fun(*this, &MainWindow::on_action_return_loan));
+		m_actiongroup->add_action("about",               sigc::mem_fun(*this, &MainWindow::on_action_about));
 		insert_action_group("actions", m_actiongroup);
 
 		m_main_box.set_border_width(8);
@@ -99,18 +99,18 @@ namespace acsmget
 		m_progressbar.set_margin_left(56);
 		m_progressbar.set_margin_right(56);
 
-		m_adeptclient->get_authorized_dispatcher()         ->connect(sigc::mem_fun(*this, &MainWindow::on_authorized_update));
-		m_adeptclient->get_busy_dispatcher()               ->connect(sigc::mem_fun(*this, &MainWindow::on_busy_update));
-		m_adeptclient->get_deauthorize_started_dispatcher()->connect(sigc::mem_fun(*this, &MainWindow::on_deauthorize_started));
-		m_adeptclient->get_deauthorize_success_dispatcher()->connect(sigc::mem_fun(*this, &MainWindow::on_deauthorize_success));
-		m_adeptclient->get_deauthorize_failed_dispatcher() ->connect(sigc::mem_fun(*this, &MainWindow::on_deauthorize_failed));
-		m_adeptclient->get_download_started_dispatcher()   ->connect(sigc::mem_fun(*this, &MainWindow::on_download_started));
-		m_adeptclient->get_download_success_dispatcher()   ->connect(sigc::mem_fun(*this, &MainWindow::on_download_success));
-		m_adeptclient->get_download_failed_dispatcher()    ->connect(sigc::mem_fun(*this, &MainWindow::on_download_failed));
-		m_adeptclient->get_progress_dispatcher()           ->connect(sigc::mem_fun(*this, &MainWindow::on_progress_update));
-		m_adeptclient->get_return_loan_started_dispatcher()->connect(sigc::mem_fun(*this, &MainWindow::on_return_loan_started));
-		m_adeptclient->get_return_loan_success_dispatcher()->connect(sigc::mem_fun(*this, &MainWindow::on_return_loan_success));
-		m_adeptclient->get_return_loan_failed_dispatcher() ->connect(sigc::mem_fun(*this, &MainWindow::on_return_loan_failed));
+		m_adeptclient->get_authorized_dispatcher()                 ->connect(sigc::mem_fun(*this, &MainWindow::on_authorized_update));
+		m_adeptclient->get_busy_dispatcher()                       ->connect(sigc::mem_fun(*this, &MainWindow::on_busy_update));
+		m_adeptclient->get_erase_authorization_started_dispatcher()->connect(sigc::mem_fun(*this, &MainWindow::on_erase_authorization_started));
+		m_adeptclient->get_erase_authorization_success_dispatcher()->connect(sigc::mem_fun(*this, &MainWindow::on_erase_authorization_success));
+		m_adeptclient->get_erase_authorization_failed_dispatcher() ->connect(sigc::mem_fun(*this, &MainWindow::on_erase_authorization_failed));
+		m_adeptclient->get_download_started_dispatcher()           ->connect(sigc::mem_fun(*this, &MainWindow::on_download_started));
+		m_adeptclient->get_download_success_dispatcher()           ->connect(sigc::mem_fun(*this, &MainWindow::on_download_success));
+		m_adeptclient->get_download_failed_dispatcher()            ->connect(sigc::mem_fun(*this, &MainWindow::on_download_failed));
+		m_adeptclient->get_progress_dispatcher()                   ->connect(sigc::mem_fun(*this, &MainWindow::on_progress_update));
+		m_adeptclient->get_return_loan_started_dispatcher()        ->connect(sigc::mem_fun(*this, &MainWindow::on_return_loan_started));
+		m_adeptclient->get_return_loan_success_dispatcher()        ->connect(sigc::mem_fun(*this, &MainWindow::on_return_loan_success));
+		m_adeptclient->get_return_loan_failed_dispatcher()         ->connect(sigc::mem_fun(*this, &MainWindow::on_return_loan_failed));
 
 		show_all_children();
 
@@ -137,10 +137,10 @@ namespace acsmget
 		m_authorization_window.show();
 	}
 
-	void MainWindow::on_action_deauthorize()
+	void MainWindow::on_action_erase_authorization()
 	{
-		if(show_yes_no_message_dialog(*this, texts_msg_ask_confirm_deauthorize, texts_action_deauthorize_computer) == Gtk::ResponseType::RESPONSE_YES) {
-			m_adeptclient->deauthorize_async();
+		if(show_yes_no_message_dialog(*this, texts_msg_ask_confirm_erase_auth, texts_action_erase_authorization) == Gtk::ResponseType::RESPONSE_YES) {
+			m_adeptclient->erase_authorization_async();
 		}
 	}
 
@@ -160,10 +160,10 @@ namespace acsmget
 	void MainWindow::on_authorized_update()
 	{
 		m_open_button.set_sensitive(m_adeptclient->get_authorized());
-		m_actiongroup->action_enabled_changed("open",         m_adeptclient->get_authorized());
-		m_actiongroup->action_enabled_changed("authorize",   !m_adeptclient->get_authorized());
-		m_actiongroup->action_enabled_changed("deauthorize",  m_adeptclient->get_authorized());
-		m_actiongroup->action_enabled_changed("return_loan",  m_adeptclient->get_authorized());
+		m_actiongroup->action_enabled_changed("open",                m_adeptclient->get_authorized());
+		m_actiongroup->action_enabled_changed("authorize",          !m_adeptclient->get_authorized());
+		m_actiongroup->action_enabled_changed("erase_authorization", m_adeptclient->get_authorized());
+		m_actiongroup->action_enabled_changed("return_loan",         m_adeptclient->get_authorized());
 		m_status_label.set_text(m_adeptclient->get_authorized() ? texts_msg_inf_open_file_to_download : texts_msg_inf_auth_computer_to_download);
 		m_additional_info_frame.hide();
 
@@ -186,32 +186,6 @@ namespace acsmget
 				m_command_line_filename = "";
 			}
 		}
-	}
-
-	void MainWindow::on_deauthorize_started()
-	{
-		m_status_label.set_text(texts_msg_inf_deauthorizing);
-		m_open_download_linkbutton.hide();
-		m_open_download_folder_linkbutton.hide();
-		m_progressbar.hide();
-	}
-
-	void MainWindow::on_deauthorize_success()
-	{
-		m_status_label.set_text(texts_msg_inf_successfully_deauthorized);
-		m_open_download_linkbutton.hide();
-		m_open_download_folder_linkbutton.hide();
-		m_progressbar.hide();
-	}
-
-	void MainWindow::on_deauthorize_failed()
-	{
-		m_status_label.set_text(texts_msg_err_deauthorization);
-		m_additional_info_label.set_text(m_adeptclient->get_error());
-		m_additional_info_frame.show();
-		m_open_download_linkbutton.hide();
-		m_open_download_folder_linkbutton.hide();
-		m_progressbar.hide();
 	}
 
 	void MainWindow::on_download_started()
@@ -244,6 +218,32 @@ namespace acsmget
 	void MainWindow::on_download_failed()
 	{
 		m_status_label.set_text(texts_msg_inf_download_failed);
+		m_additional_info_label.set_text(m_adeptclient->get_error());
+		m_additional_info_frame.show();
+		m_open_download_linkbutton.hide();
+		m_open_download_folder_linkbutton.hide();
+		m_progressbar.hide();
+	}
+
+	void MainWindow::on_erase_authorization_started()
+	{
+		m_status_label.set_text(texts_msg_inf_erasing_authorization);
+		m_open_download_linkbutton.hide();
+		m_open_download_folder_linkbutton.hide();
+		m_progressbar.hide();
+	}
+
+	void MainWindow::on_erase_authorization_success()
+	{
+		m_status_label.set_text(texts_msg_inf_authorization_erased);
+		m_open_download_linkbutton.hide();
+		m_open_download_folder_linkbutton.hide();
+		m_progressbar.hide();
+	}
+
+	void MainWindow::on_erase_authorization_failed()
+	{
+		m_status_label.set_text(texts_msg_err_erase_authorization);
 		m_additional_info_label.set_text(m_adeptclient->get_error());
 		m_additional_info_frame.show();
 		m_open_download_linkbutton.hide();

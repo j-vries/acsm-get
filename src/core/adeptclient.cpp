@@ -65,17 +65,6 @@ namespace acsmget
 		}
 	}
 	
-	void AdeptClient::deauthorize_async()
-	{
-		if(m_thread == nullptr) {
-			m_thread = new std::thread([this] {
-				deauthorize();
-				m_thread_finished_dispatcher.emit();
-			});
-			m_busy_dispatcher.emit();
-		}
-	}
-
 	void AdeptClient::download_async(const std::string &acsm_file)
 	{
 		if(m_thread == nullptr) {
@@ -83,6 +72,17 @@ namespace acsmget
 				download(_acsm_file);
 				m_thread_finished_dispatcher.emit();
 			}, acsm_file);
+			m_busy_dispatcher.emit();
+		}
+	}
+
+	void AdeptClient::erase_authorization_async()
+	{
+		if(m_thread == nullptr) {
+			m_thread = new std::thread([this] {
+				erase_authorization();
+				m_thread_finished_dispatcher.emit();
+			});
 			m_busy_dispatcher.emit();
 		}
 	}
@@ -133,21 +133,6 @@ namespace acsmget
 		return &m_authorize_failed_dispatcher;
 	}
 
-	Glib::Dispatcher *AdeptClient::get_deauthorize_started_dispatcher()
-	{
-		return &m_deauthorize_started_dispatcher;
-	}
-
-	Glib::Dispatcher *AdeptClient::get_deauthorize_success_dispatcher()
-	{
-		return &m_deauthorize_success_dispatcher;
-	}
-
-	Glib::Dispatcher *AdeptClient::get_deauthorize_failed_dispatcher()
-	{
-		return &m_deauthorize_failed_dispatcher;
-	}
-
 	Glib::Dispatcher *AdeptClient::get_authorized_dispatcher()
 	{
 		return &m_authorized_dispatcher;
@@ -166,6 +151,21 @@ namespace acsmget
 	Glib::Dispatcher *AdeptClient::get_download_failed_dispatcher()
 	{
 		return &m_download_failed_dispatcher;
+	}
+
+	Glib::Dispatcher *AdeptClient::get_erase_authorization_started_dispatcher()
+	{
+		return &m_erase_authorization_started_dispatcher;
+	}
+
+	Glib::Dispatcher *AdeptClient::get_erase_authorization_success_dispatcher()
+	{
+		return &m_erase_authorization_success_dispatcher;
+	}
+
+	Glib::Dispatcher *AdeptClient::get_erase_authorization_failed_dispatcher()
+	{
+		return &m_erase_authorization_failed_dispatcher;
 	}
 
 	Glib::Dispatcher *AdeptClient::get_return_loan_started_dispatcher()
@@ -227,22 +227,6 @@ namespace acsmget
 		}
 	}
 	
-	void AdeptClient::deauthorize()
-	{
-		try {
-			// TODO: Ideally this would also deauthorize with Adobe, but libgourou currently does not support this.
-			std::filesystem::remove(m_activation_file);
-			std::filesystem::remove(m_device_file);
-			std::filesystem::remove(m_device_salt_file);
-			set_authorized(false);
-			m_deauthorize_success_dispatcher.emit();
-		}
-		catch(std::exception &e) {
-			m_error = e.what();
-			m_deauthorize_failed_dispatcher.emit();
-		}
-	}
-
 	void AdeptClient::download(const std::string &acsm_file)
 	{
 		set_progress(0);
@@ -279,6 +263,21 @@ namespace acsmget
 		catch(std::exception &e) {
 			m_error = e.what();
 			m_download_failed_dispatcher.emit();
+		}
+	}
+
+	void AdeptClient::erase_authorization()
+	{
+		try {
+			std::filesystem::remove(m_activation_file);
+			std::filesystem::remove(m_device_file);
+			std::filesystem::remove(m_device_salt_file);
+			set_authorized(false);
+			m_erase_authorization_success_dispatcher.emit();
+		}
+		catch(std::exception &e) {
+			m_error = e.what();
+			m_erase_authorization_failed_dispatcher.emit();
 		}
 	}
 

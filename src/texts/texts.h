@@ -27,7 +27,7 @@ namespace acsmget
 	const std::string texts_action_authorize_computer         = "Authorize computer";
 	const std::string texts_action_cancel                     = "Cancel";
 	const std::string texts_action_create_or_manage_account   = "Create or manage Adobe account";
-	const std::string texts_action_deauthorize_computer       = "Deauthorize computer";
+	const std::string texts_action_erase_authorization        = "Erase authorization";
 	const std::string texts_action_open                       = "Open";
 	const std::string texts_action_return_loan                = "Return loan";
 	const std::string texts_action_show_in_folder             = "Show in folder";
@@ -41,25 +41,24 @@ namespace acsmget
 	const std::string texts_lbl_no_account                    = "No account";
 	const std::string texts_lbl_username                      = "Username";
 	const std::string texts_lbl_password                      = "Password";
-	const std::string texts_msg_ask_confirm_deauthorize       = "If you deauthorize this computer you can no longer download acsm files on it, unless you authorize it "
-																"again.\n\nContinue?";
+	const std::string texts_msg_ask_confirm_erase_auth        = "If you erase authorization you can no longer download acsm files, unless you authorize again.\n\nContinue?";
 	const std::string texts_msg_err_authorization             = "Unable to authorize computer.";
-	const std::string texts_msg_err_deauthorization           = "Unable to deauthorize computer.";
+	const std::string texts_msg_err_erase_authorization       = "Unable to erase authorization.";
 	const std::string texts_msg_err_home_variable_not_set     = "The HOME environment variable is not set.";
 	const std::string texts_msg_err_not_a_loan                = "This e-book does not appear to be a loan.";
 	const std::string texts_msg_inf_auth_computer_to_download = "Authorize your computer to download acsm files.";
+	const std::string texts_msg_inf_authorization_erased      = "Authorization erased.";
 	const std::string texts_msg_inf_book_is_loan              = "The downloaded e-book is a loan. When you have finished reading, you can return it via the menu so other people may "
 																"borrow it.";
-	const std::string texts_msg_inf_deauthorizing             = "Deauthorizing…";
 	const std::string texts_msg_inf_download_completed        = "Download completed.";
 	const std::string texts_msg_inf_download_failed           = "Download failed.";
 	const std::string texts_msg_inf_downloading               = "Downloading…";
+	const std::string texts_msg_inf_erasing_authorization     = "Erasing authorization…";
 	const std::string texts_msg_inf_loan_returned             = "Loan returned.";
 	const std::string texts_msg_inf_open_file_to_download     = "Open an acsm file to download.";
 	const std::string texts_msg_inf_return_loan_failed        = "Unable to return loan.";
 	const std::string texts_msg_inf_returning_loan            = "Returning loan…";
 	const std::string texts_msg_inf_successfully_authorized   = "Your computer has been authorized.";
-	const std::string texts_msg_inf_successfully_deauthorized = "Your computer has been deauthorized.";
 	const std::string texts_other_acsm_file_filter            = "Adobe Content Server Message files (*.acsm)";
 	const std::string texts_other_untitled_book_name          = "Untitled";
 	const std::string texts_title_app                         = "acsm-get";
