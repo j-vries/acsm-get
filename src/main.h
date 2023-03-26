@@ -18,7 +18,7 @@
 #ifndef ACSMGET_MAIN_H
 #define ACSMGET_MAIN_H
 
-#define ACSMGET_VERSION		"1.0.0"
+#define ACSMGET_VERSION		"1.0.1"
 #define ACSMGET_WEBSITE		"https://github.com/j-vries/acsm-get"
 #define ACSMGET_COPYRIGHT	"Copyright (c) 2023 Jan de Vries"
 #define ACSMGET_APP_ID		"jan.de.vries.acsmget"
