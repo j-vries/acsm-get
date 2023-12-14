@@ -53,6 +53,7 @@ generate_licenses:
 
 generate_resources:
 	mkdir -p res/generated
+	mkdir -p src/generated
 	glib-compile-resources --target=src/generated/resources.c --generate-source res/acsmget.gresource.xml
 
 acsm-get: generate_licenses generate_resources
