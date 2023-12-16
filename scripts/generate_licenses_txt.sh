@@ -2,19 +2,8 @@
 
 LICENSES_TXT="res/generated/licenses.txt"
 
-# Ensure all the expected license files exist.
-ensureFileExists()
-{
-	if [ ! -f "$1" ]; then
-		echo "$1 does not exist."
-		exit 1
-	fi
-}
-
-ensureFileExists COPYING
-ensureFileExists lib/libgourou/LICENSE
-ensureFileExists lib/libgourou/utils/LICENSE
-ensureFileExists lib/updfparser/LICENSE
+# Abort on error.
+set -e
 
 # Ensure all versions can be determined.
 ensureVersionSuccessfullyDetermined()

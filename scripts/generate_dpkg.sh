@@ -1,19 +1,7 @@
 #!/bin/bash
 
-# Ensure all the expected files exist.
-ensureFileExists()
-{
-	if [ ! -f "$1" ]; then
-		echo "$1 does not exist."
-		exit 1
-	fi
-}
-
-ensureFileExists bin/acsm-get
-ensureFileExists res/acsm-get.desktop
-ensureFileExists res/acsm-get.png
-ensureFileExists res/acsm-get.svg
-ensureFileExists res/acsm-get-mimetypes.xml
+# Abort on error.
+set -e
 
 # Ensure version can be determined.
 ensureVersionSuccessfullyDetermined()
