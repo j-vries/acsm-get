@@ -1,7 +1,9 @@
 Introduction
 ------------
 
-acsm-get is an open source tool to download e-books with Adobe DRM. It was made to give Linux users a way to download their e-books, since Adobe Digital Editions does not exist for this platform.
+acsm-get is a tool to download e-books with Adobe DRM. It was made to give Linux users a way to download their e-books, since Adobe Digital Editions does not exist for this platform.
+
+It is a GUI for Grégory Soutadé's libgourou, which you can find [here](https://forge.soutade.fr/soutade/libgourou).
 
 
 Copyright
