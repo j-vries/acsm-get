@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LICENSES_TXT="res/generated/licenses.txt"
+LICENSES_TXT="res/gen/licenses.txt"
 
 # Abort on error.
 set -e

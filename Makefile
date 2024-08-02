@@ -6,7 +6,7 @@ SOURCES      += src/application.cpp
 SOURCES      += src/core/adeptclient.cpp
 SOURCES      += src/core/downloadinfo.cpp
 SOURCES      += src/core/drmprocessorclient.cpp
-SOURCES      += src/generated/resources.c
+SOURCES      += src/gen/resources.c
 SOURCES      += src/ui/aboutdialog.cpp
 SOURCES      += src/ui/acsmfilechooserdialog.cpp
 SOURCES      += src/ui/authorizationwindow.cpp
@@ -36,8 +36,8 @@ clean:
 	rm -rf lib/libgourou/lib
 	rm -rf bin
 	rm -rf obj
-	rm -rf res/generated/*
-	rm -rf src/generated/*
+	rm -rf res/gen/*
+	rm -rf src/gen/*
 
 updfparser:
 	cd lib/updfparser && make BUILD_STATIC=1 BUILD_SHARED=0
@@ -48,13 +48,13 @@ libgourou:
 	cd lib/libgourou && $(MAKE) BUILD_STATIC=1 BUILD_SHARED=0 all
 
 generate_licenses:
-	mkdir -p res/generated
+	mkdir -p res/gen
 	scripts/generate_licenses_txt.sh
 
 generate_resources:
-	mkdir -p res/generated
-	mkdir -p src/generated
-	glib-compile-resources --target=src/generated/resources.c --generate-source res/acsmget.gresource.xml
+	mkdir -p res/gen
+	mkdir -p src/gen
+	glib-compile-resources --target=src/gen/resources.c --generate-source res/acsmget.gresource.xml
 
 acsm-get: generate_licenses generate_resources
 	mkdir -p bin

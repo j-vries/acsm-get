@@ -2,6 +2,6 @@
 <gresources>
 	<gresource prefix="/acsmget">
 		<file compressed="true" alias="acsm-get.svg">res/acsm-get.svg</file>
-		<file compressed="true" alias="licenses.txt">res/generated/licenses.txt</file>
+		<file compressed="true" alias="licenses.txt">res/gen/licenses.txt</file>
 	</gresource>
 </gresources>
