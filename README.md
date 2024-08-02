@@ -9,7 +9,7 @@ It is a GUI for Grégory Soutadé's libgourou, which you can find [here](https:/
 Copyright
 ---------
 
-Copyright (c) 2023 Jan de Vries
+Copyright (c) 2023-2024 Jan de Vries
 
 
 License

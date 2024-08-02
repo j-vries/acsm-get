@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2023 Jan de Vries
+	Copyright (c) 2023-2024 Jan de Vries
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
 #ifndef ACSMGET_MAIN_H
 #define ACSMGET_MAIN_H
 
-#define ACSMGET_VERSION		"1.0.1"
+#define ACSMGET_VERSION		"1.0.2"
 #define ACSMGET_WEBSITE		"https://github.com/j-vries/acsm-get"
-#define ACSMGET_COPYRIGHT	"Copyright (c) 2023 Jan de Vries"
+#define ACSMGET_COPYRIGHT	"Copyright (c) 2023-2024 Jan de Vries"
 #define ACSMGET_APP_ID		"jan.de.vries.acsmget"
 #define ACSMGET_PRG_NAME	"acsm-get"
 
